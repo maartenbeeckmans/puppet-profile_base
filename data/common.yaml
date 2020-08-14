@@ -1,0 +1,22 @@
+---
+lookup_options:
+  profile::base::accounts::accounts:
+    merge:
+      strategy: deep
+      merge_hash_arrays: true
+  profile::base::accounts::groups:
+    merge:
+      strategy: deep
+      merge_hash_arrays: true
+  profile::base::accounts::sudo_confs:
+    merge:
+      strategy: deep
+      merge_hash_arrays: true
+  profile::base::firewall::entries:
+    merge:
+      strategy: deep
+      merge_hash_arrays: true
+  profile::base::repositories::repositories:
+    merge:
+      strategy: deep
+      merge_hash_arrays: true
