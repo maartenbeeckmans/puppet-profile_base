@@ -36,7 +36,7 @@ class profile_base::accounts (
   if length($sudo_confs) > 0 {
     class { 'sudo':
       config_file_replace =>  false,
-      pruge               =>  false,
+      purge               =>  false,
     }
     create_resources( 'sudo::conf', $sudo_confs)
   }
