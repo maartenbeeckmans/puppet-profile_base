@@ -19,7 +19,7 @@ class profile_base::motd (
 {
   if $use_template {
     class {'motd':
-      template => 'profile/base_motd.epp'
+      template => 'profile_base/base_motd.epp'
     }
   } else {
     class {'motd':
