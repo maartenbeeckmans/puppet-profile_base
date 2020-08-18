@@ -28,22 +28,14 @@ class profile_base::ssh (
   String    $print_motd               = 'yes',
   String    $x11_forwarding           = 'no',
 ) {
-  class { 'ssh':
+  class { 'ssh::server':
     storeconfigs_enabled => $storeconfigs_enabled,
-    server_options       => {
+    options              => {
       'PasswordAuthentication' => $password_authentication,
       'PermitRootLogin'        => $permit_root_login,
       'Port'                   => $ports,
-      'ChrootDirectory'        => '%h',
       'PrintMotd'              => $print_motd,
       'X11Forwarding'          => $x11_forwarding,
-    },
-    client_options       => {
-      'Host *'                => {
-        'SendEnv'             => 'LANG LC_*',
-        'ForwardX11Trusted'   => $x11_forwarding,
-        'ServerAliveInterval' => '10',
-      },
     },
     validate_sshd_file   => true,
   }
