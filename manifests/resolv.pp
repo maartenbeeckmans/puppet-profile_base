@@ -15,7 +15,7 @@
 # $searchpath     List of search domains
 class profile_base::resolv (
   Optional[String]  $domain       = undef,
-  Array             $name_servers = ['127.0.0.1'],
+  Array             $name_servers = ['8.8.8.8', '8.8.4.4'],
   Array             $searchpath   = [],
 )
 {
