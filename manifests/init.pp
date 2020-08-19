@@ -23,7 +23,7 @@
 #
 # $manage_repos         Set to true if puppet must manage repositories
 #
-# $manage_resolv        Set to true if puppet must manage resolv configuration
+# $manage_network        Set to true if puppet must manage network configuration
 #
 # $manage_selinux       Set to true if puppet must manage selinux configuration
 #
@@ -37,7 +37,7 @@ class profile_base (
   Boolean $manage_packages = false,
   Boolean $manage_puppet   = false,
   Boolean $manage_repos    = false,
-  Boolean $manage_resolv   = false,
+  Boolean $manage_network   = false,
   Boolean $manage_selinux  = false,
   Boolean $manage_ssh      = false,
 )
@@ -69,8 +69,8 @@ class profile_base (
     class { 'profile_base::repositories': }
   }
 
-  if $manage_resolv {
-    class { 'profile_base::resolv': }
+  if $manage_network {
+    class { 'profile_base::network': }
   }
   if $manage_selinux {
     class { 'profile_base::selinux': }
