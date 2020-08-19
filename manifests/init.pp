@@ -15,6 +15,8 @@
 # $manage_fail2ban      Set to true if puppet must manage fail2ban,
 #                       $manage_firewall must be true
 #
+# $manage_monitoring    Set up monitoring on node
+#
 # $manage_motd          Set to true if puppet must manage fail2ban
 #
 # $manage_packages      Set to true if puppet must install basic packages
@@ -30,16 +32,17 @@
 # $manage_ssh           Set to true if puppet must manage ssh configuration
 #
 class profile_base (
-  Boolean $manage_accounts = false,
-  Boolean $manage_firewall = false,
-  Boolean $manage_fail2ban = false,
-  Boolean $manage_motd     = false,
-  Boolean $manage_packages = false,
-  Boolean $manage_puppet   = false,
-  Boolean $manage_repos    = false,
-  Boolean $manage_network   = false,
-  Boolean $manage_selinux  = false,
-  Boolean $manage_ssh      = false,
+  Boolean $manage_accounts   = false,
+  Boolean $manage_firewall   = false,
+  Boolean $manage_fail2ban   = false,
+  Boolean $manage_monitoring = false,
+  Boolean $manage_motd       = false,
+  Boolean $manage_packages   = false,
+  Boolean $manage_puppet     = false,
+  Boolean $manage_repos      = false,
+  Boolean $manage_network    = false,
+  Boolean $manage_selinux    = false,
+  Boolean $manage_ssh        = false,
 )
 {
   if $manage_accounts {
@@ -51,6 +54,10 @@ class profile_base (
       class { 'profile_base::fail2ban': }
     }
     class { 'profile_base::firewall': }
+  }
+
+  if $manage_monitoring {
+    class { 'profile_base::monitoring': }
   }
 
   if $manage_motd {
