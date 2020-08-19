@@ -46,9 +46,9 @@ class profile_base::network (
     }
     # Default route
     network::route { $interface:
-      ipaddress => '0.0.0.0',
-      netmask   => '0.0.0.0',
-      gateway   => $gateway,
+      ipaddress => ['0.0.0.0'],
+      netmask   => ['0.0.0.0'],
+      gateway   => [$gateway],
     }
   }
   class { 'resolv_conf':
