@@ -5,3 +5,4 @@ Processor:    <%= $facts[processor0] %>
 Memory:       <%= $facts[memorysize] %>
 OS:           <%= $facts[operatingsystem] %> <%= $facts[operatingsystemrelease] %> <%= $facts[architecture] %>
 Kernel:       <%= $facts[kernel] %> <%= $facts[kernelversion] %>
+Modules:      <%= $modules %>
