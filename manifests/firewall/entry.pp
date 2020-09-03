@@ -29,12 +29,12 @@
 #               Must be INVALID, ESTABLISHED, NEW, RELATED or UNRELATED
 #
 define profile_base::firewall::entry (
-  Profile::FirewallAction $action = 'accept',
-  Profile::FirewallChain $chain = 'INPUT',
+  Profile_base::FirewallAction $action = 'accept',
+  Profile_base::FirewallChain $chain = 'INPUT',
   Optional[String] $interface = undef,
   Optional[Variant[Integer, Array[Integer],Array[String]]] $port = undef,
-  Profile::FirewallProtocol $protocol = 'tcp',
-  Profile::FirewallProvider $provider = 'iptables',
+  Profile_base::FirewallProtocol $protocol = 'tcp',
+  Profile_base::FirewallProvider $provider = 'iptables',
   Optional[Variant[Profile_base::FirewallState, Array[Profile_base::FirewallState]]] $state = undef,
 ) {
   firewall { $name:
