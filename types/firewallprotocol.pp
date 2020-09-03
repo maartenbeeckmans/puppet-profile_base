@@ -1,4 +1,4 @@
-type Profile::FirewallProtocol = Enum[
+type Profile_base::FirewallProtocol = Enum[
   'icmp',
   'tcp',
   'sctp',

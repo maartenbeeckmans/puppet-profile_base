@@ -1,4 +1,4 @@
-type Profile::FirewallChain = Enum[
+type Profile_base::FirewallChain = Enum[
   'INPUT',
   'FORWARD',
   'OUTPUT',

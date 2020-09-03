@@ -1,4 +1,4 @@
-type Profile::FirewallState = Enum[
+type Profile_base::FirewallState = Enum[
   'INVALID',
   'ESTABLISHED',
   'NEW',
