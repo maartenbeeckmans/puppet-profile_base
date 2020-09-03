@@ -32,28 +32,25 @@
 # $manage_ssh           Set to true if puppet must manage ssh configuration
 #
 class profile_base (
-  Boolean $manage_accounts   = false,
-  Boolean $manage_firewall   = false,
-  Boolean $manage_fail2ban   = false,
+  Boolea $manage_fail2ban   = false,
   Boolean $manage_monitoring = false,
   Boolean $manage_motd       = false,
-  Boolean $manage_packages   = false,
   Boolean $manage_puppet     = false,
-  Boolean $manage_repos      = false,
-  Boolean $manage_network    = false,
   Boolean $manage_selinux    = false,
   Boolean $manage_ssh        = false,
 )
 {
-  if $manage_accounts {
-    class { 'profile_base::accounts': }
-  }
+  anchor { '::profile_base::begin': }
+  -> class { 'profile_base::network': }
+  -> class { '::profile_base::repositories' }
+  -> class { '::profile_base::packages' }
+  -> class { '::profile_base::accounts': }
+  -> class { '::profile_base::firewall': }
+  -> anchor { '::profile_base::end': }
 
-  if $manage_firewall {
-    if $manage_fail2ban {
-      class { 'profile_base::fail2ban': }
-    }
-    class { 'profile_base::firewall': }
+
+  if $manage_fail2ban {
+    class { 'profile_base::fail2ban': }
   }
 
   if $manage_monitoring {
@@ -64,21 +61,10 @@ class profile_base (
     class { 'profile_base::motd': }
   }
 
-  if $manage_packages {
-    class { 'profile_base::packages': }
-  }
-
   if $manage_puppet {
     class { 'profile::puppet': }
   }
 
-  if $manage_repos {
-    class { 'profile_base::repositories': }
-  }
-
-  if $manage_network {
-    class { 'profile_base::network': }
-  }
   if $manage_selinux {
     class { 'profile_base::selinux': }
   }
