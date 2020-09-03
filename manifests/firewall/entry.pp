@@ -35,7 +35,7 @@ define profile_base::firewall::entry (
   Optional[Variant[Integer, Array[Integer],Array[String]]] $port = undef,
   Profile::FirewallProtocol $protocol = 'tcp',
   Profile::FirewallProvider $provider = 'iptables',
-  Optional[Variant[Profile::FirewallState, Array[Profile::FirewallState]]] $state = undef,
+  Optional[Variant[Profile_base::FirewallState, Array[Profile_base::FirewallState]]] $state = undef,
 ) {
   firewall { $name:
     action   => $action,
