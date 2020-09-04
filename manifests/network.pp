@@ -26,7 +26,7 @@
 # $searchpath     List of search domains
 class profile_base::network (
   String            $interface    = 'eth0',
-  Boolean           $dhcp         = true,
+  Boolean           $dhcp         = false,
   String            $ipaddress    = undef,
   String            $netmask      = '255.255.255.0',
   String            $gateway      = undef,

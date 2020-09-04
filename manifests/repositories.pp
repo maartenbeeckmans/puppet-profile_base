@@ -7,15 +7,8 @@
 # - puppet-epel
 # - puppetlabs-apt
 #
-# === Parameters
-#
-# $epel       Manage the epel repository
-#
-class profile_base::repositories (
-  Boolean $epel      = true,
-)
-{
-  if $facts['os']['family'] == 'RedHat' and $epel {
+class profile_base::repositories {
+  if $facts['os']['family'] == 'RedHat' {
     class { 'epel': }
   }
 }

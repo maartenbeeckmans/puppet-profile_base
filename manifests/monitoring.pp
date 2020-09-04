@@ -5,14 +5,6 @@
 # @example when declaring the base class
 #  class { '::profile_base::monitoring': }
 #
-# === Parameters
-#
-# $prometheus       Install prometheus node exporter on the node
-#
-class profile_base::monitoring (
-  Boolean $prometheus = false,
-) {
-  if $prometheus {
-    include profile_prometheus::node_exporter
-  }
+class profile_base::monitoring {
+  include profile_prometheus::node_exporter
 }
