@@ -32,7 +32,7 @@
 # $manage_ssh           Set to true if puppet must manage ssh configuration
 #
 class profile_base (
-  Boolea $manage_fail2ban   = false,
+  Boolean $manage_fail2ban   = false,
   Boolean $manage_monitoring = false,
   Boolean $manage_motd       = false,
   Boolean $manage_puppet     = false,
@@ -42,8 +42,8 @@ class profile_base (
 {
   anchor { '::profile_base::begin': }
   -> class { 'profile_base::network': }
-  -> class { '::profile_base::repositories' }
-  -> class { '::profile_base::packages' }
+  -> class { '::profile_base::repositories': }
+  -> class { '::profile_base::packages': }
   -> class { '::profile_base::accounts': }
   -> class { '::profile_base::firewall': }
   -> anchor { '::profile_base::end': }
