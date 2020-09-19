@@ -18,9 +18,6 @@ class profile_base::motd (
 )
 {
   if $use_template {
-    if !empty($::puppet_modules) {
-      $modules = join($::puppet_modules, ', ')
-    }
     class {'motd':
       template => 'profile_base/base_motd.epp'
     }
