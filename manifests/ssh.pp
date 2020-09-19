@@ -42,7 +42,8 @@ class profile_base::ssh (
 
   $ports.each |String $port| {
     firewall { "010 allow ssh port ${port}":
-      dport => Integer($port),
+      dport  => Integer($port),
+      action => 'accept',
     }
   }
 }
