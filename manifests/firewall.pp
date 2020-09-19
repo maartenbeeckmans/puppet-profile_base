@@ -18,10 +18,9 @@
 #
 class profile_base::firewall (
   String $ensure = 'running',
-  Hash $entries = {},
   Boolean $purge = true,
 ) {
-  class { '::firewall':
+  class { 'firewall': 
     ensure => $ensure,
   }
 
@@ -29,13 +28,10 @@ class profile_base::firewall (
     purge => $purge,
   }
 
-  profile_base::firewall::entry { '000 related,established':
-    protocol => 'all',
-    state    => [
-      'RELATED',
-      'ESTABLISHED',
-    ],
+  Firewall {
+    before  => Class['profile_base::firewall::post'],
+    require => Class['profile_base::firewall::pre'],
   }
 
-  create_resources( '::profile_base::firewall::entry', $entries)
+  class { ['profile_base::firewall::pre', 'profile_base::firewall::post']: }
 }
