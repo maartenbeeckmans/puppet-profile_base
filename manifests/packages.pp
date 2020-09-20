@@ -11,6 +11,7 @@ class profile_base::packages (
 )
 {
   package { $default_packages:
-    ensure => present,
+    ensure  => present,
+    require => Class['epel'],
   }
 }
