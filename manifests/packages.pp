@@ -7,7 +7,7 @@
 # $default_packages   Packages to install on the target system
 #
 class profile_base::packages (
-  $default_packages = ['vim-enhanced', 'tree', 'htop', 'bind-utils'],
+  $default_packages = ['vim-enhanced', 'tree', 'htop'],
 )
 {
   package { $default_packages:

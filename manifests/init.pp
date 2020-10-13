@@ -23,6 +23,7 @@ class profile_base (
   -> class { 'profile_base::motd': }
   -> class { 'profile_base::selinux': }
   -> class { 'profile_base::ssh': }
+  -> class { 'profile_base::puppet': }
 
   if $manage_fail2ban {
     class { 'profile_base::fail2ban': }

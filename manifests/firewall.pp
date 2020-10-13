@@ -20,7 +20,7 @@ class profile_base::firewall (
   String $ensure = 'running',
   Boolean $purge = true,
 ) {
-  class { 'firewall': 
+  class { 'firewall':
     ensure => $ensure,
   }
 
