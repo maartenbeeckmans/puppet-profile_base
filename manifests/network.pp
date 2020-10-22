@@ -39,7 +39,7 @@ class profile_base::network (
     network::interface { $interface:
       enable_dhcp => true,
     }
-  } elsif ! $ipaddress {
+  } elsif $ipaddress {
     network::interface { $interface:
       ipaddress => $ipaddress,
       netmask   => $netmask,
