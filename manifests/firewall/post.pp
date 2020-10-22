@@ -2,7 +2,7 @@
 #
 #
 class profile_base::firewall::post {
-  firewall { '999 drop all':
+  firewall { '99999 drop all':
     proto  => 'all',
     action => 'drop',
     before => undef,
