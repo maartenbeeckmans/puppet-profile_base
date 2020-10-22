@@ -2,7 +2,7 @@
 #
 #
 class profile_base::puppet (
-  Stdlib::Fqdn $puppetmaster = 'puppet.vagrant.beeckmans.io',
+  Stdlib::Fqdn $puppetmaster,
 ) {
   # Do not add class to puppetmaster
   unless $facts['networking']['fqdn'] =~ /^puppet\w*/ {
