@@ -32,7 +32,7 @@ class profile_base::ssh (
     ensure => present,
     value  => $port,
   }
-  sshd_config { 'PAcceptEnv':
+  sshd_config { 'AcceptEnv':
     ensure => present,
     value  => 'LANG LC_*',
   }
