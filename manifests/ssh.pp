@@ -40,7 +40,7 @@ class profile_base::ssh (
     ensure => present,
     value  => 'no',
   }
-  ssy_config { 'Subsystem':
+  sshd_config { 'Subsystem':
     ensure => present,
     value  => 'sftp /usr/lib/openssh/sftp-server',
   }
