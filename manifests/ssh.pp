@@ -19,12 +19,16 @@
 # $x11_forwarding                  Allow X11Forwarding with ssh
 #
 class profile_base::ssh (
-  String    $port                    = '22',
-  String    $permit_root_login        = 'no',
-  String    $password_authentication  = 'yes',
-  String    $print_motd               = 'no',
-  String    $x11_forwarding           = 'no',
+  String $sshd_package_name       = 'openssh=server',
+  String $port                    = '22',
+  String $permit_root_login       = 'no',
+  String $password_authentication = 'yes',
+  String $print_motd              = 'yes',
+  String $x11_forwarding          = 'no',
 ) {
+  package { $sshd_package_name:
+    ensure => present,
+  }
   resources { 'sshd_config':
     purge => true,
   }
@@ -34,7 +38,7 @@ class profile_base::ssh (
   }
   sshd_config { 'AcceptEnv':
     ensure => present,
-    value  => 'LANG LC_*',
+    value  => ['LANG', 'LC_*'],
   }
   sshd_config { 'ChallengeResponseAuthentication':
     ensure => present,
@@ -42,7 +46,7 @@ class profile_base::ssh (
   }
   sshd_config { 'Subsystem':
     ensure => present,
-    value  => 'sftp /usr/lib/openssh/sftp-server',
+    value  => ['sftp', '/usr/lib/openssh/sftp-server'],
   }
   sshd_config { 'UsePAM':
     ensure => present,
