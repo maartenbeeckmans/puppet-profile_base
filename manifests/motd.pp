@@ -21,8 +21,8 @@ class profile_base::motd (
     mode  => '0644',
   }
   file { $motd_file:
-    ensure   => present,
-    template => 'profile_base/motd.epp'
+    ensure  => present,
+    content => epp('profile_base/motd.epp')
   }
   concat::fragment { 'motd_header':
     target => $motd_file,
