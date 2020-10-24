@@ -50,6 +50,9 @@ class profile_base::network (
       netmask   => ['0.0.0.0'],
       gateway   => [$gateway],
     }
+    package { ['isc-dhcp-client', 'isc-dhcp-common']:
+      ensure => absent,
+    }
   }
   class { 'resolv_conf':
     domainname  => $domain,
