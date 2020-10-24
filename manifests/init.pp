@@ -13,19 +13,17 @@ class profile_base (
   Boolean $manage_fail2ban   = false,
 )
 {
-
-  class { 'profile_base::network': }
-  -> class { 'profile_base::repositories': }
-  -> class { 'profile_base::packages': }
-  -> class { 'profile_base::accounts': }
-  -> class { 'profile_base::firewall': }
-  -> class { 'profile_base::monitoring': }
-  -> class { 'profile_base::motd': }
-  -> class { 'profile_base::selinux': }
-  -> class { 'profile_base::ssh': }
-  -> class { 'profile_base::puppet': }
-
+  include profile_base::network
+  include profile_base::repositories
+  include profile_base::packages
+  include profile_base::accounts
+  include profile_base::firewall
+  include profile_base::monitoring
+  include profile_base::motd
+  include profile_base::selinux
+  include profile_base::ssh
+  include profile_base::puppet
   if $manage_fail2ban {
-    class { 'profile_base::fail2ban': }
+    include profile_base::fail2ban
   }
 }
