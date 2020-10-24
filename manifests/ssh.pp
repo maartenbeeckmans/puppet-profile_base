@@ -19,7 +19,7 @@
 # $x11_forwarding                  Allow X11Forwarding with ssh
 #
 class profile_base::ssh (
-  String $sshd_package_name       = 'openssh=server',
+  String $sshd_package_name       = 'openssh-server',
   String $port                    = '22',
   String $permit_root_login       = 'no',
   String $password_authentication = 'yes',
