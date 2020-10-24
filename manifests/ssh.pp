@@ -23,7 +23,7 @@ class profile_base::ssh (
   String $port                    = '22',
   String $permit_root_login       = 'no',
   String $password_authentication = 'yes',
-  String $print_motd              = 'yes',
+  String $print_motd              = 'no',
   String $x11_forwarding          = 'no',
 ) {
   package { $sshd_package_name:
