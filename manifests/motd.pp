@@ -33,7 +33,7 @@ class profile_base::motd (
   if $motd_message {
     concat::fragment { 'motd_custom_message':
       target  => $motd_file,
-      content => $motd_message,
+      content => "${motd_message}\n",
       order   => '10',
     }
   }

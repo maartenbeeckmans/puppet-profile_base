@@ -3,7 +3,7 @@ This machine is managed by Puppet
 FQDN:          <%= $facts[networking][fqdn] %>
 Interfaces:
 <% $facts[networking][interfaces].each |$interface| { -%>
-<% if interface[0] != 'lo' { -%>
+<% if $interface[0] != 'lo' { -%>
                - <%= $interface[0] %>: <%= $interface[1][ip] %>
 <% } -%>
 <% } -%>
