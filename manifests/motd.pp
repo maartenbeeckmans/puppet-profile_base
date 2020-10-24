@@ -11,8 +11,8 @@
 # $motd_message       Set the content of a custom motd
 #
 class profile_base::motd (
-  String  $motd_message = undef,
-  String  $motd_file    = '/etc/motd',
+  Optional[String] $motd_message = undef,
+  String           $motd_file    = '/etc/motd',
 )
 {
   concat { $motd_file:
@@ -20,9 +20,13 @@ class profile_base::motd (
     group => 'root',
     mode  => '0644',
   }
+  file { $motd_file:
+    ensure   => present,
+    template => 'profile_base/motd.epp'
+  }
   concat::fragment { 'motd_header':
     target => $motd_file,
-    source => 'profile_base/base_motd.epp',
+    source => "${motd_file}.header",
     order  => '05',
   }
 

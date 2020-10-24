@@ -1,7 +1,0 @@
-This machine is managed by Puppet
-
-FQDN:         <%= $facts[fqdn] %> (<%= $facts[ipaddress] %>)
-Processor:    <%= $facts[processor0] %>
-Memory:       <%= $facts[memorysize] %>
-OS:           <%= $facts[operatingsystem] %> <%= $facts[operatingsystemrelease] %> <%= $facts[architecture] %>
-Kernel:       <%= $facts[kernel] %> <%= $facts[kernelversion] %>
