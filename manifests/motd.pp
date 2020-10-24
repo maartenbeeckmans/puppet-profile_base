@@ -8,22 +8,29 @@
 #
 # === Parameters
 #
-# $use_template       Set to true if module uses template defined in profile/base_motd.epp
-#
-# $motd_message       Set the content of a custom motd when template is not used
+# $motd_message       Set the content of a custom motd
 #
 class profile_base::motd (
-  Boolean $use_template = true,
-  String  $motd_message = 'This machine is managed by Puppet',
+  String  $motd_message = undef,
+  String  $motd_file    = '/etc/motd',
 )
 {
-  if $use_template {
-    class {'motd':
-      template => 'profile_base/base_motd.epp'
-    }
-  } else {
-    class {'motd':
-      content =>  $motd_message,
+  concat { $motd_file:
+    owner => 'root',
+    group => 'root',
+    mode  => '0644',
+  }
+  concat::fragment { 'motd_header':
+    target => $motd_file,
+    source => 'profile_base/base_motd.epp',
+    order  => '05',
+  }
+
+  if $motd_message {
+    concat::fragment { 'motd_custom_message':
+      target  => $motd_file,
+      content => $motd_message,
+      order   => '10',
     }
   }
 }

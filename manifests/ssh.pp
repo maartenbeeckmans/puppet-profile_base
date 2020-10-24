@@ -44,10 +44,6 @@ class profile_base::ssh (
     ensure => present,
     value  => 'no',
   }
-  sshd_config { 'Subsystem':
-    ensure => present,
-    value  => ['sftp', '/usr/lib/openssh/sftp-server'],
-  }
   sshd_config { 'UsePAM':
     ensure => present,
     value  => 'yes',
