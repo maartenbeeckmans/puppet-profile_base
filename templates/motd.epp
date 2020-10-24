@@ -9,8 +9,8 @@ Interfaces:
 <% } -%>
 Processor:     <%= $facts[processors][models][0] %>
 Virtual:       <%= $facts[virtual] %>
-System memory: <%= $facts[memory][system][used] %> / <%= $facts[memory][system][total] %>
-Swap:          <%= $facts[memory][swap][used] %> / <%= $facts[memory][swap][total] %>
+System memory: <%= $facts[memory][system][total] %>
+Swap:          <%= $facts[memory][swap][total] %>
 Disks:
 <% $facts[disks].each |$disk| { -%>
                - <%= $disk[0] %>: <%= $disk[1][size] %>
@@ -27,6 +27,4 @@ Partitions:
 OS:            <%= $facts[os][distro][description] %>
 Architecture:  <%= $facts[os][hardware] %>
 Kernel:        <%= $facts[kernel] %> <%= $facts[kernelversion] %>
-Load:          <%= $facts[load_averages]['1m'] %> <%= $facts[load_averages]['5m'] %> <%= $facts[load_averages]['15m'] %>
-Uptime:        <%= $facts[system_uptime][uptime] %>
 
