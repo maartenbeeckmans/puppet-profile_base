@@ -20,7 +20,7 @@ class profile_base::motd (
     group => 'root',
     mode  => '0644',
   }
-  file { $motd_file:
+  file { "$motd_file.header":
     ensure  => present,
     content => epp('profile_base/motd.epp')
   }
