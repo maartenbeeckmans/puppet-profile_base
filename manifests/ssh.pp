@@ -20,6 +20,7 @@
 #
 class profile_base::ssh (
   String $sshd_package_name       = 'openssh-server',
+  String $sshd_service_name       = 'sshd',
   String $port                    = '22',
   String $permit_root_login       = 'no',
   String $password_authentication = 'yes',
@@ -35,34 +36,46 @@ class profile_base::ssh (
   sshd_config { 'Port':
     ensure => present,
     value  => $port,
+    notify => Service[$sshd_service_name],
   }
   sshd_config { 'AcceptEnv':
     ensure => present,
     value  => ['LANG', 'LC_*'],
+    notify => Service[$sshd_service_name],
   }
   sshd_config { 'ChallengeResponseAuthentication':
     ensure => present,
     value  => 'no',
+    notify => Service[$sshd_service_name],
   }
   sshd_config { 'UsePAM':
     ensure => present,
     value  => 'yes',
+    notify => Service[$sshd_service_name],
   }
   sshd_config { 'PermitRootLogin':
     ensure => present,
     value  => $permit_root_login,
+    notify => Service[$sshd_service_name],
   }
   sshd_config { 'PasswordAuthentication':
     ensure => present,
     value  => $password_authentication,
+    notify => Service[$sshd_service_name],
   }
   sshd_config { 'PrintMotd':
     ensure => present,
     value  => $print_motd,
+    notify => Service[$sshd_service_name],
   }
   sshd_config { 'X11Forwarding':
     ensure => present,
     value  => $x11_forwarding,
+    notify => Service[$sshd_service_name],
+  }
+  service { $sshd_service_name:
+    ensure => running,
+    enable => true,
   }
   firewall { "000${port} allow ssh":
     dport  => Integer($port),
