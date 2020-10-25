@@ -7,7 +7,7 @@
 # $default_packages   Packages to install on the target system
 #
 class profile_base::packages (
-  $default_packages = ['vim', 'tree', 'htop', 'iftop', 'iotop', 'screen', 'telnet', 'silversearcher-ag'],
+  $default_packages = ['vim', 'tree', 'htop', 'iftop', 'iotop', 'tmux', 'telnet', 'silversearcher-ag', 'dnsutils'],
 )
 {
   package { $default_packages:
