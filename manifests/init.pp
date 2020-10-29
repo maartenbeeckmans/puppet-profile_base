@@ -21,7 +21,6 @@ class profile_base (
   include profile_base::monitoring
   include profile_base::motd
   include profile_base::ntp
-  include profile_base::selinux
   include profile_base::ssh
   include profile_base::puppet
   if $manage_fail2ban {
