@@ -25,5 +25,6 @@ class profile_base::puppet (
       user        => root,
       minute      => range(fqdn_rand($_run_interval, $facts['networking']['fqdn']), 59, $_run_interval),
       environment => 'PATH=/bin:/usr/bin:/usr/local/bin',
+    }
   }
 }
