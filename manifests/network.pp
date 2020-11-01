@@ -59,4 +59,13 @@ class profile_base::network (
     nameservers => $name_servers,
     searchpath  => $searchpath,
   }
+
+  # Disable ipv6
+  sysctl { 'net.ipv6.conf.all.disable_ipv6':
+    ensure  => present,
+    value   => "1",
+    comment => 'Disable ipv6',
+  }
+}
+
 }
