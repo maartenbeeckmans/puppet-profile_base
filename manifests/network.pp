@@ -63,9 +63,7 @@ class profile_base::network (
   # Disable ipv6
   sysctl { 'net.ipv6.conf.all.disable_ipv6':
     ensure  => present,
-    value   => "1",
+    value   => '1',
     comment => 'Disable ipv6',
   }
-}
-
 }
