@@ -75,7 +75,6 @@ class profile_base::ssh (
   }
   service { $sshd_service_name:
     ensure => running,
-    enable => true,
   }
   firewall { "000${port} allow ssh":
     dport  => Integer($port),
