@@ -11,6 +11,7 @@
 #
 class profile_base (
   Boolean $manage_fail2ban   = false,
+  Boolean $manage_sd_service = false,
 )
 {
   include profile_base::network
@@ -25,5 +26,8 @@ class profile_base (
   include profile_base::puppet
   if $manage_fail2ban {
     include profile_base::fail2ban
+  }
+  if $manage_sd_service {
+    include profile_consul
   }
 }
