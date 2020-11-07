@@ -12,6 +12,7 @@
 class profile_base (
   Boolean $manage_fail2ban   = false,
   Boolean $manage_sd_service = false,
+  String  $timezone          = 'Europe/Brussels',
 )
 {
   include profile_base::network
@@ -24,6 +25,9 @@ class profile_base (
   include profile_base::ntp
   include profile_base::ssh
   include profile_base::puppet
+  class { 'timezone':
+    timezone => $timezone,
+  }
   if $manage_fail2ban {
     include profile_base::fail2ban
   }
