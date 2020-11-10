@@ -34,4 +34,10 @@ class profile_base (
   if $manage_sd_service {
     include profile_consul
   }
+  file { '/etc/profile.d/history.sh':
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
+    content => 'export HISTTIMEFORMAT="%d/%m/%y %t "'
+  }
 }
