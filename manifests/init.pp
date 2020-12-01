@@ -10,12 +10,15 @@
 # $manage_fail2ban      Set to true if puppet must manage fail2ban
 #
 class profile_base (
+  Boolean $manage_network    = true,
   Boolean $manage_fail2ban   = false,
   Boolean $manage_sd_service = false,
   String  $timezone          = 'Europe/Brussels',
 )
 {
-  include profile_base::network
+  if $manage_network {
+    include profile_base::network
+  }
   include profile_base::repositories
   include profile_base::packages
   include profile_base::accounts
