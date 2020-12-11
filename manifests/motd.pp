@@ -1,26 +1,16 @@
-# == Class: profile_base::motd
 #
-# Manages motd on the system
 #
-# === Dependencies
-#
-# - puppetlabs-motd
-#
-# === Parameters
-#
-# $motd_message       Set the content of a custom motd
 #
 class profile_base::motd (
-  Optional[String] $motd_message = undef,
-  String           $motd_file    = '/etc/motd',
-)
-{
+  Optional[String] $motd_message = $::profile_base::motd_message,
+  String           $motd_file    = $::profile_base::motd_file,
+) {
   concat { $motd_file:
     owner => 'root',
     group => 'root',
     mode  => '0644',
   }
-  file { "$motd_file.header":
+  file { "${motd_file}.header":
     ensure  => present,
     content => epp('profile_base/motd.epp')
   }

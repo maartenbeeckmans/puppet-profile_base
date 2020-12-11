@@ -1,26 +1,11 @@
-# == Class: profile_base::accounts
 #
-# Manages user accounts, groups and sudo configuations
 #
-# === Dependencies
-#
-# - puppetlabs-accounts
-# - saz-sudo
-#
-# === Parameters
-#
-# $users        Hash of the user configuration
-#
-# $groups       Hash of the group configuration
-#
-# $sudo_confs   Hash of the sudo configuration
 #
 class profile_base::accounts (
-  Hash $users   = {},
-  Hash $groups     = {},
-  Hash $sudo_confs = {},
-)
-{
+  Hash $users      = $::profile_base::users,
+  Hash $groups     = $::profile_base::groups,
+  Hash $sudo_confs = $::profile_base::sudo_confs,
+) {
   if length($users) > 0 {
     create_resources( 'accounts::user', $users)
   }

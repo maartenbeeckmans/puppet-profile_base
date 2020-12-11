@@ -2,10 +2,10 @@
 #
 #
 class profile_base::puppet (
-  Optional[String] $puppetmaster    = undef,
-  Boolean          $use_srv_records = false,
-  Optional[String] $srv_domain      = undef,
-  Integer          $runs_per_hour   = 2,
+  Optional[String] $puppetmaster    = $::profile_base::puppetmaster,
+  Boolean          $use_srv_records = $::profile_base::puppet_use_srv_records,
+  Optional[String] $srv_domain      = $::profile_base::puppet_srv_domain,
+  Integer          $runs_per_hour   = $::profile_base::puppet_runs_per_hour,
 ) {
   # Do not add class to puppetmaster
   unless $facts['networking']['fqdn'] =~ /^puppet\w*/ {

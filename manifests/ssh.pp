@@ -1,31 +1,14 @@
-# == Class: profile_base::ssh
 #
-# Manages ssh client and server configuration + firewall
 #
-# === Dependencies
-#
-# - saz-ssh
-#
-# === Parameters
-#
-# $ports                           Array of ssh ports
-#
-# $permit_root_login               Allow root login with ssh
-#
-# $password_authentication         Allow password authentication with ssh
-#
-# $print_motd                      Print motd when connected with ssh
-#
-# $x11_forwarding                  Allow X11Forwarding with ssh
 #
 class profile_base::ssh (
-  String $sshd_package_name       = 'openssh-server',
-  String $sshd_service_name       = 'sshd',
-  String $port                    = '22',
-  String $permit_root_login       = 'no',
-  String $password_authentication = 'yes',
-  String $print_motd              = 'no',
-  String $x11_forwarding          = 'no',
+  String $sshd_package_name       = $::profile_base::sshd_package_name,
+  String $sshd_service_name       = $::profile_base::sshd_service_name,
+  String $port                    = $::profile_base::ssh_port,
+  String $permit_root_login       = $::profile_base::ssh_permit_root_login,
+  String $password_authentication = $::profile_base::ssh_password_authentication,
+  String $print_motd              = $::profile_base::ssh_print_motd,
+  String $x11_forwarding          = $::profile_base::ssh_x11_forwarding,
 ) {
   package { $sshd_package_name:
     ensure => present,
