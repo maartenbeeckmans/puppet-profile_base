@@ -25,6 +25,7 @@ profile_base::default_packages:
   - dnsutils
   - unzip
   - tar
+  - jq
 profile_base::users: {}
 profile_base::groups: {}
 profile_base::sudo_confs: {}
