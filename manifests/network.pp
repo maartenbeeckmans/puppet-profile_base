@@ -2,14 +2,14 @@
 #
 #
 class profile_base::network (
-  String            $interface    = 'eth0',
-  Boolean           $dhcp         = false,
-  String            $ipaddress    = undef,
-  String            $netmask      = '255.255.255.0',
-  String            $gateway      = undef,
-  Optional[String]  $domain       = undef,
-  Array             $name_servers = ['8.8.8.8', '8.8.4.4'],
-  Array             $searchpath   = [],
+  String            $interface    = $::profile_base::interface,
+  Boolean           $dhcp         = $::profile_base::dhcp,
+  String            $ipaddress    = $::profile_base::ipaddress,
+  String            $netmask      = $::profile_base::netmask,
+  String            $gateway      = $::profile_base::gateway,
+  Optional[String]  $domain       = $::profile_base::domain,
+  Array             $name_servers = $::profile_base::name_servers,
+  Array             $searchpath   = $::profile_base::searchpath,
 ) {
   if $dhcp {
     network::interface { $interface:
