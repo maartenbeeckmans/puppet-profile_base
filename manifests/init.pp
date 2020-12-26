@@ -23,6 +23,7 @@ class profile_base (
   Array             $ntp_restrictions,
   Array             $ntp_restrictions_defaults,
   Boolean           $manage_firewall_entry,
+  Hash              $mounts,
   String            $sshd_package_name,
   String            $sshd_service_name,
   String            $ssh_port,
@@ -66,4 +67,5 @@ class profile_base (
     group   => 'root',
     content => 'export HISTTIMEFORMAT="%d/%m/%y %t "'
   }
+  create_resources(profile_base::mount, $mounts)
 }
