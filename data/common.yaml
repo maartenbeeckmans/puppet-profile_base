@@ -45,6 +45,7 @@ profile_base::ntp_restrictions_defaults:
   - '127.0.0.1'
   - '-6 ::1'
 profile_base::manage_firewall_entry: false
+profile_base::mounts: {}
 profile_base::sshd_package_name: 'openssh-server'
 profile_base::sshd_service_name: 'sshd'
 profile_base::ssh_port: '22'
