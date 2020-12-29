@@ -10,7 +10,9 @@ Interfaces:
 Processor:     <%= $facts[processors][models][0] %>
 Virtual:       <%= $facts[virtual] %>
 System memory: <%= $facts[memory][system][total] %>
+<% if $facts[memory][swap] { -%>
 Swap:          <%= $facts[memory][swap][total] %>
+<% } -%>
 Disks:
 <% $facts[disks].each |$disk| { -%>
                - <%= $disk[0] %>: <%= $disk[1][size] %>
