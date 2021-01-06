@@ -16,6 +16,7 @@ profile_base::default_packages:
   - curl
   - httpie
   - wget
+  - tcpdump
   - htop
   - iftop
   - iotop
