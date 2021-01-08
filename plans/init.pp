@@ -2,11 +2,13 @@
 #
 #
 plan profile_base (
-  TargetSpec $targets,
+  TargetSpec $nodes,
 ) {
-  apply_prep([$targets])
+  apply_prep([$nodes])
 
-  run_plan("profile_base")
+  apply($nodes) {
+    include ::profile_base
+  }
 
   return("Applied profile_base")
 }

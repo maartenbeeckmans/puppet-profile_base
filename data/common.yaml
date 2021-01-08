@@ -54,6 +54,7 @@ profile_base::ssh_permit_root_login: 'no'
 profile_base::ssh_password_authentication: 'yes'
 profile_base::ssh_print_motd: 'no'
 profile_base::ssh_x11_forwarding: 'no'
+profile_base::manage_puppet: false
 profile_base::puppetmaster: undef
 profile_base::puppet_use_srv_records: false
 profile_base::puppet_srv_domain: undef

@@ -31,6 +31,7 @@ class profile_base (
   String            $ssh_password_authentication,
   String            $ssh_print_motd,
   String            $ssh_x11_forwarding,
+  Boolean           $manage_puppet,
   Optional[String]  $puppetmaster,
   Boolean           $puppet_use_srv_records,
   Optional[String]  $puppet_srv_domain,
@@ -51,7 +52,9 @@ class profile_base (
   include profile_base::motd
   include profile_base::ntp
   include profile_base::ssh
-  include profile_base::puppet
+  if $manage_puppet {
+    include profile_base::puppet
+  }
   class { 'timezone':
     timezone => $timezone,
   }
