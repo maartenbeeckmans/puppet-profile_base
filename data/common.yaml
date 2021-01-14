@@ -2,9 +2,7 @@
 profile_base::manage_network: true
 profile_base::interface: 'eth0'
 profile_base::dhcp: false
-profile_base::ipaddress: undef
 profile_base::netmask: '255.255.255.0'
-profile_base::gateway: undef
 profile_base::domain: '~.'
 profile_base::name_servers:
   - '8.8.8.8'
@@ -31,7 +29,6 @@ profile_base::groups: {}
 profile_base::sudo_confs: {}
 profile_base::firewall_ensure: 'running'
 profile_base::firewall_purge: true
-profile_base::motd_message: undef
 profile_base::motd_file: '/etc/motd'
 profile_base::ntp_servers:
   - time1.google.com
@@ -54,9 +51,7 @@ profile_base::ssh_password_authentication: 'yes'
 profile_base::ssh_print_motd: 'no'
 profile_base::ssh_x11_forwarding: 'no'
 profile_base::manage_puppet: false
-profile_base::puppetmaster: undef
 profile_base::puppet_use_srv_records: false
-profile_base::puppet_srv_domain: undef
 profile_base::puppet_runs_per_hour: 2
 profile_base::manage_fail2ban: false
 profile_base::timezone: 'Europe/Brussels'

@@ -2,11 +2,11 @@
 #
 #
 class profile_base::network (
-  String            $interface    = $::profile_base::interface,
-  Boolean           $dhcp         = $::profile_base::dhcp,
-  String            $ipaddress    = $::profile_base::ipaddress,
-  String            $netmask      = $::profile_base::netmask,
-  String            $gateway      = $::profile_base::gateway,
+  String           $interface    = $::profile_base::interface,
+  Boolean          $dhcp         = $::profile_base::dhcp,
+  Optional[String] $ipaddress    = $::profile_base::ipaddress,
+  String           $netmask      = $::profile_base::netmask,
+  Optional[String] $gateway      = $::profile_base::gateway,
 ) {
   if $dhcp {
     network::interface { $interface:

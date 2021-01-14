@@ -2,8 +2,8 @@
 #
 #
 class profile_base::systemd (
-  Optional[String]  $domain       = $::profile_base::domain,
-  Array             $name_servers = $::profile_base::name_servers,
+  String $domain       = $::profile_base::domain,
+  Array  $name_servers = $::profile_base::name_servers,
 ) {
   class { 'systemd':
     manage_resolved   => true,
