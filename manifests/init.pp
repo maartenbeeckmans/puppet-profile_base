@@ -27,6 +27,8 @@ class profile_base (
   String           $ssh_password_authentication,
   String           $ssh_print_motd,
   String           $ssh_x11_forwarding,
+  Boolean          $manage_puppet,
+  Boolean          $manage_puppet,
   Boolean          $puppet_use_srv_records,
   Integer          $puppet_runs_per_hour,
   Boolean          $manage_fail2ban,

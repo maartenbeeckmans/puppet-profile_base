@@ -50,7 +50,7 @@ profile_base::ssh_permit_root_login: 'no'
 profile_base::ssh_password_authentication: 'yes'
 profile_base::ssh_print_motd: 'no'
 profile_base::ssh_x11_forwarding: 'no'
-profile_base::manage_puppet: false
+profile_base::manage_puppet: true
 profile_base::puppet_use_srv_records: false
 profile_base::puppet_runs_per_hour: 2
 profile_base::manage_fail2ban: false
