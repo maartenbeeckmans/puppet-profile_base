@@ -5,11 +5,10 @@ profile_base::dhcp: false
 profile_base::ipaddress: undef
 profile_base::netmask: '255.255.255.0'
 profile_base::gateway: undef
-profile_base::domain: undef
+profile_base::domain: '~.'
 profile_base::name_servers:
   - '8.8.8.8'
   - '8.8.4.4'
-profile_base::searchpath: []
 profile_base::default_packages:
   - vim
   - tree

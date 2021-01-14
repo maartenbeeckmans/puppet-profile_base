@@ -10,7 +10,6 @@ class profile_base (
   String            $gateway,
   Optional[String]  $domain,
   Array             $name_servers,
-  Array             $searchpath,
   Array[String]     $default_packages,
   Hash              $users,
   Hash              $groups,
@@ -48,6 +47,7 @@ class profile_base (
   include profile_base::packages
   include profile_base::accounts
   include profile_base::firewall
+  include logrotate
   include profile_base::monitoring
   include profile_base::motd
   include profile_base::ntp
@@ -55,6 +55,7 @@ class profile_base (
   if $manage_puppet {
     include profile_base::puppet
   }
+  include profile_base::systemd
   class { 'timezone':
     timezone => $timezone,
   }

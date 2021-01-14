@@ -7,9 +7,6 @@ class profile_base::network (
   String            $ipaddress    = $::profile_base::ipaddress,
   String            $netmask      = $::profile_base::netmask,
   String            $gateway      = $::profile_base::gateway,
-  Optional[String]  $domain       = $::profile_base::domain,
-  Array             $name_servers = $::profile_base::name_servers,
-  Array             $searchpath   = $::profile_base::searchpath,
 ) {
   if $dhcp {
     network::interface { $interface:
@@ -29,11 +26,6 @@ class profile_base::network (
     package { ['isc-dhcp-client', 'isc-dhcp-common']:
       ensure => absent,
     }
-  }
-  class { 'resolv_conf':
-    domainname  => $domain,
-    nameservers => $name_servers,
-    searchpath  => $searchpath,
   }
 
   # Disable ipv6
