@@ -1,8 +1,7 @@
 ---
 profile_base::manage_network: true
-profile_base::interface: 'eth0'
-profile_base::dhcp: false
-profile_base::netmask: '255.255.255.0'
+profile_base::static_routes: {}
+profile_base::static_ifaces: {}
 profile_base::domain: '~.'
 profile_base::name_servers:
   - '8.8.8.8'

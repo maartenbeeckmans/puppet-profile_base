@@ -2,30 +2,42 @@
 #
 #
 class profile_base::network (
-  String           $interface    = $::profile_base::interface,
-  Boolean          $dhcp         = $::profile_base::dhcp,
-  Optional[String] $ipaddress    = $::profile_base::ipaddress,
-  String           $netmask      = $::profile_base::netmask,
-  Optional[String] $gateway      = $::profile_base::gateway,
+  Hash             $static_routes = $::profile_base::static_routes,
+  Hash             $static_ifaces = $::profile_base::static_ifaces,
 ) {
-  if $dhcp {
-    network::interface { $interface:
-      enable_dhcp => true,
+  # This loop is looking for network configuration, which is defined by custom facts with the following syntax:
+  # # /etc/factor/facts.d/network.yaml
+  # ipaddress_<interface_name>: x.x.x.x
+  # netmask_<interface_name>: x.x.x.x
+  # gateway_<interface_name>: x.x.x.x
+  extend_network_interfaces($::interfaces).each |String $iface| {
+    # ipaddress
+    $_ipaddress = $facts["ipaddress_${iface}"]
+    # netmask
+    $_netmask = $facts["netmask_${iface}"]
+    # gateway
+    if $facts["gateway_${iface}"] == '' {
+      $_gateway = undef
+    } else {
+      $_gateway = $facts["gateway_${iface}"]
     }
-  } elsif $ipaddress {
-    network::interface { $interface:
-      ipaddress => $ipaddress,
-      netmask   => $netmask,
+    # macaddress
+    $_primary_iface = regsubst($iface, ':[0-9]*$', '') # eth0.0 > 0
+    $_mac_address = $facts["macaddress_${_primary_iface}"]
+
+    if $_ipaddress != '' {
+      network::interface { $iface:
+        enable    => true,
+        ipaddress => $_ipaddress,
+        netmask   => $_netmask,
+        hwaddr    => $_mac_address,
+        gateway   => $_gateway,
+      }
     }
-    # Default route
-    network::route { $interface:
-      ipaddress => ['0.0.0.0'],
-      netmask   => ['0.0.0.0'],
-      gateway   => [$gateway],
-    }
-    package { ['isc-dhcp-client', 'isc-dhcp-common']:
-      ensure => absent,
-    }
+  }
+
+  package { ['isc-dhcp-client', 'isc-dhcp-common']:
+    ensure => absent,
   }
 
   # Disable ipv6
@@ -34,4 +46,7 @@ class profile_base::network (
     value   => '1',
     comment => 'Disable ipv6',
   }
+
+  create_resources('::network::route', $static_routes)
+  create_resources('::network::if::static', $static_ifaces)
 }
