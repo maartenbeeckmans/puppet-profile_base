@@ -23,6 +23,7 @@ profile_base::default_packages:
   - unzip
   - tar
   - jq
+  - ncdu
 profile_base::users: {}
 profile_base::groups: {}
 profile_base::sudo_confs: {}
