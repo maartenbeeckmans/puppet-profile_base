@@ -41,10 +41,12 @@ class profile_base (
   if $manage_network {
     include profile_base::network
   }
+  include profile_base::bash
   include profile_base::repositories
   include profile_base::packages
   include profile_base::accounts
   include profile_base::firewall
+  include profile_base::hiera_protection
   include logrotate
   include profile_base::monitoring
   include profile_base::motd
