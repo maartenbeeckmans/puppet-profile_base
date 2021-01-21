@@ -59,3 +59,5 @@ profile_base::fail2ban_services:
   - ssh
   - ssh-ddos
 profile_base::manage_sd_service: false
+profile_base::manage_prometheus_node_exporter: true
+profile_base::manage_prometheus_postfix_exporter: true

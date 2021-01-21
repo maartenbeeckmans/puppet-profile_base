@@ -33,6 +33,8 @@ class profile_base (
   String           $timezone,
   Array            $fail2ban_services,
   Boolean          $manage_sd_service,
+  Boolean          $manage_prometheus_node_exporter,
+  Boolean          $manage_prometheus_postfix_exporter,
   Optional[String] $motd_message                = undef,
   Optional[String] $puppetmaster                = undef,
   Optional[String] $puppet_srv_domain           = undef,
@@ -48,7 +50,9 @@ class profile_base (
   include profile_base::firewall
   include profile_base::hiera_protection
   include logrotate
-  include profile_base::monitoring
+  if $manage_prometheus_node_exporter {
+    include profile_prometheus::node_exporter
+  }
   include profile_base::motd
   include profile_base::ntp
   include profile_base::ssh
