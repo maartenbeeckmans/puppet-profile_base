@@ -36,6 +36,7 @@ class profile_base (
   Boolean          $manage_prometheus_node_exporter,
   Boolean          $manage_prometheus_process_exporter,
   Boolean          $manage_prometheus_postfix_exporter,
+  Boolean          $manage_choria,
   Optional[String] $motd_message                = undef,
   Optional[String] $puppetmaster                = undef,
   Optional[String] $puppet_srv_domain           = undef,
@@ -80,6 +81,9 @@ class profile_base (
     owner   => 'root',
     group   => 'root',
     content => 'export HISTTIMEFORMAT="%d/%m/%y %t "'
+  }
+  if $manage_choria {
+    include profile_choria
   }
   create_resources(profile_base::mount, $mounts)
 }
