@@ -34,6 +34,7 @@ class profile_base (
   Array            $fail2ban_services,
   Boolean          $manage_sd_service,
   Boolean          $manage_prometheus_node_exporter,
+  Boolean          $manage_prometheus_process_exporter,
   Boolean          $manage_prometheus_postfix_exporter,
   Optional[String] $motd_message                = undef,
   Optional[String] $puppetmaster                = undef,
@@ -52,6 +53,9 @@ class profile_base (
   include logrotate
   if $manage_prometheus_node_exporter {
     include profile_prometheus::node_exporter
+  }
+  if $manage_prometheus_process_exporter {
+    include profile_prometheus::process_exporter
   }
   include profile_base::motd
   include profile_base::ntp
