@@ -26,7 +26,7 @@ Partitions:
                - <%= $partition[1][filesystem] %>: <%= $partition[1][size] %>
 <% } -%>
 <% } -%>
-OS:            <%= $facts[os][distro][description] %>
+OS:            <%= $facts[os][name] %> <%= $facts[os][release][full] %>
 Architecture:  <%= $facts[os][hardware] %>
 Kernel:        <%= $facts[kernel] %> <%= $facts[kernelversion] %>
 

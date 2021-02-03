@@ -6,24 +6,6 @@ profile_base::domain: '~.'
 profile_base::name_servers:
   - '8.8.8.8'
   - '8.8.4.4'
-profile_base::default_packages:
-  - vim
-  - tree
-  - curl
-  - httpie
-  - wget
-  - tcpdump
-  - htop
-  - iftop
-  - iotop
-  - tmux
-  - telnet
-  - silversearcher-ag
-  - dnsutils
-  - unzip
-  - tar
-  - jq
-  - ncdu
 profile_base::users: {}
 profile_base::groups: {}
 profile_base::sudo_confs: {}
@@ -35,12 +17,6 @@ profile_base::ntp_servers:
   - time2.google.com
   - time3.google.com
   - time4.google.com
-profile_base::ntp_restrictions: []
-profile_base::ntp_restrictions_defaults:
-  - 'default kod nomodify notrap nopeer noquery'
-  - '-6 default kod nomodify notrap nopeer noquery'
-  - '127.0.0.1'
-  - '-6 ::1'
 profile_base::manage_firewall_entry: false
 profile_base::mounts: {}
 profile_base::sshd_package_name: 'openssh-server'

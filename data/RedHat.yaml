@@ -1,0 +1,19 @@
+---
+profile_base::default_packages:
+  - vim
+  - tree
+  - curl
+  - wget
+  - tcpdump
+  - htop
+  - iftop
+  - iotop
+  - tmux
+  - telnet
+  - the_silver_searcher
+  - bind-utils
+  - unzip
+  - tar
+  - jq
+  - ncdu
+...

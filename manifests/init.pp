@@ -15,8 +15,6 @@ class profile_base (
   Boolean          $firewall_purge,
   String           $motd_file,
   Array            $ntp_servers,
-  Array            $ntp_restrictions,
-  Array            $ntp_restrictions_defaults,
   Boolean          $manage_firewall_entry,
   Hash             $mounts,
   String           $sshd_package_name,
