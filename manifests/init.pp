@@ -58,6 +58,9 @@ class profile_base (
   }
   include profile_base::motd
   include profile_base::ntp
+  if $facts['os']['family'] == 'RedHat' {
+    include profile_base::selinux
+  }
   include profile_base::ssh
   if $manage_puppet {
     include profile_base::puppet
