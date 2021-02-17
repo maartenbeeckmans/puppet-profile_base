@@ -5,10 +5,8 @@ class profile_base::firewall::pre {
   Firewall {
     require => undef,
   }
-  firewall { '05813 accept all icmp':
-    proto  => 'icmp',
-    action => 'accept',
-  }
+
+  # Default rules INPUT CHAIN
   firewall { '00001 accept all to lo interface':
     proto   => 'all',
     iniface => 'lo',
@@ -23,6 +21,10 @@ class profile_base::firewall::pre {
   firewall { '00003 accept related established rules':
     proto  => 'all',
     state  => ['RELATED', 'ESTABLISHED'],
+    action => 'accept',
+  }
+  firewall { '05813 accept all icmp':
+    proto  => 'icmp',
     action => 'accept',
   }
 }
