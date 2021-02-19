@@ -1,17 +1,21 @@
 #
 define profile_base::mount (
-  String               $device,
-  Stdlib::Absolutepath $path    = $name,
-  String               $type    = 'ext4',
-  Boolean              $mkdir   = true,
-  Boolean              $mkfs    = true,
-  String               $owner   = 'root',
-  String               $group   = 'root',
-  Array[String]        $options = ['defaults', 'noatime'],
-  String               $dump    = '1',
-  String               $pass    = '2',
+  Optional[String]     $device     = undef,
+  Stdlib::Absolutepath $path       = $name,
+  String               $type       = 'ext4',
+  Boolean              $mkdir      = true,
+  Boolean              $mkfs       = true,
+  String               $owner      = 'root',
+  String               $group      = 'root',
+  Array[String]        $options    = ['defaults', 'noatime'],
+  String               $dump       = '1',
+  String               $pass       = '2',
+  Optional[String]     $server     = undef,
+  Optional[String]     $share      = undef,
+  String               $domain     = lookup('profile_nfs::domain', String, first, $facts['networking']['domain']),
+  String               $mount_root = lookup('profile_nfs::mount_root', String, first, '/srv'),
 ) {
-  if $mkdir {
+  if $mkdir and $type != 'nfs' {
     file { $path:
       ensure => directory,
       owner  => $owner,
@@ -20,7 +24,7 @@ define profile_base::mount (
     }
   }
 
-  if $mkfs {
+  if $mkfs and $type != 'nfs' {
     filesystem { $device:
       ensure  => present,
       fs_type => $type,
@@ -28,13 +32,26 @@ define profile_base::mount (
     }
   }
 
-  mount { $path:
-    ensure  => mounted,
-    atboot  => true,
-    device  => $device,
-    fstype  => $type,
-    options => join($options, ','),
-    dump    => $dump,
-    pass    => $pass,
+  if $type == 'nfs' {
+    include profile_nfs
+
+    nfs::client::mount { $path:
+      ensure => mounted,
+      server => $server,
+      share  => $share,
+      owner  => $owner,
+      group  => $group,
+      atboot => true,
+    }
+  } else {
+    mount { $path:
+      ensure  => mounted,
+      atboot  => true,
+      device  => $device,
+      fstype  => $type,
+      options => join($options, ','),
+      dump    => $dump,
+      pass    => $pass,
+    }
   }
 }
