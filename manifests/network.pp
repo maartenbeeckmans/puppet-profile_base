@@ -12,11 +12,11 @@ class profile_base::network (
   # gateway_<interface_name>: x.x.x.x
   extend_network_interfaces($::interfaces).each |String $iface| {
     # ipaddress
-    $_ipaddress = $facts["ipaddress_${iface}"]
+    $_ipaddress = $facts["init_ipaddress_${iface}"]
     # netmask
-    $_netmask = $facts["netmask_${iface}"]
+    $_netmask = $facts["init_netmask_${iface}"]
     # gateway
-    if $facts["gateway_${iface}"] == '' {
+    if $facts["init_gateway_${iface}"] == '' {
       $_gateway = undef
     } else {
       $_gateway = $facts["gateway_${iface}"]
@@ -25,7 +25,7 @@ class profile_base::network (
     $_primary_iface = regsubst($iface, ':[0-9]*$', '') # eth0.0 > 0
     $_mac_address = $facts["macaddress_${_primary_iface}"]
 
-    if $_ipaddress != '' {
+    if $_ipaddress and $_netmask {
       network::interface { $iface:
         enable    => true,
         ipaddress => $_ipaddress,
