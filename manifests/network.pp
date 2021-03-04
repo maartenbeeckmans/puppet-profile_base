@@ -6,7 +6,7 @@ class profile_base::network (
   Hash             $static_ifaces = $::profile_base::static_ifaces,
 ) {
   # This loop is looking for network configuration, which is defined by custom facts with the following syntax:
-  # # /etc/factor/facts.d/network.yaml
+  # cat /etc/facter/facts.d/network.yaml
   # ipaddress_<interface_name>: x.x.x.x
   # netmask_<interface_name>: x.x.x.x
   # gateway_<interface_name>: x.x.x.x
@@ -19,7 +19,7 @@ class profile_base::network (
     if $facts["init_gateway_${iface}"] == '' {
       $_gateway = undef
     } else {
-      $_gateway = $facts["gateway_${iface}"]
+      $_gateway = $facts["init_gateway_${iface}"]
     }
     # macaddress
     $_primary_iface = regsubst($iface, ':[0-9]*$', '') # eth0.0 > 0
