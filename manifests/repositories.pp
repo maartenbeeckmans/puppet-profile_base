@@ -13,7 +13,7 @@ class profile_base::repositories {
       }
     }
     class { 'apt::backports':
-      pin => 500,
+      pin => 100,
     }
   }
 }
