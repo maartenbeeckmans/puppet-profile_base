@@ -7,6 +7,7 @@ define profile_base::mount (
   Boolean              $mkfs       = true,
   String               $owner      = 'root',
   String               $group      = 'root',
+  String               $mode       = '0644',
   Array[String]        $options    = ['defaults', 'noatime'],
   String               $dump       = '1',
   String               $pass       = '2',
@@ -20,6 +21,7 @@ define profile_base::mount (
       ensure => directory,
       owner  => $owner,
       group  => $group,
+      mode   => $mode,
       before => Mount[$path]
     }
   }
