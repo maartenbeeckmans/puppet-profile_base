@@ -30,5 +30,5 @@ OS:            <%= $facts[os][name] %> <%= $facts[os][release][full] %>
 Architecture:  <%= $facts[os][hardware] %>
 Kernel:        <%= $facts[kernel] %> <%= $facts[kernelversion] %>
 <% if $facts[hypervisor] { -%>
-hypervisor:    <%= $facts[hypervisor] %>
+Hypervisor:    <%= $facts[hypervisor] %>
 <% } -%>
