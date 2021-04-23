@@ -3,7 +3,7 @@ This machine is managed by Puppet
 FQDN:          <%= $facts[networking][fqdn] %>
 Interfaces:
 <% $facts[networking][interfaces].each |$interface| { -%>
-<% if $interface[0] != 'lo' { -%>
+<% if $interface[0] != 'lo' and $interface[1][ip] { -%>
                - <%= $interface[0] %>: <%= $interface[1][ip] %>
 <% } -%>
 <% } -%>
@@ -29,4 +29,6 @@ Partitions:
 OS:            <%= $facts[os][name] %> <%= $facts[os][release][full] %>
 Architecture:  <%= $facts[os][hardware] %>
 Kernel:        <%= $facts[kernel] %> <%= $facts[kernelversion] %>
-
+<% if $facts[hypervisor] { -%>
+hypervisor:    <%= $facts[hypervisor] %>
+<% } -%>
