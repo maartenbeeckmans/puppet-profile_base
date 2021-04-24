@@ -1,20 +1,6 @@
 ---
 profile_base::default_packages:
-  - vim
-  - tree
-  - curl
   - httpie
-  - wget
-  - tcpdump
-  - htop
-  - iftop
-  - iotop
-  - tmux
-  - telnet
   - silversearcher-ag
   - dnsutils
-  - unzip
-  - tar
-  - jq
-  - ncdu
 ...

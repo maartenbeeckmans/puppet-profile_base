@@ -1,4 +1,8 @@
 ---
+lookup_options:
+  profile_base::default_packages:
+    merge:
+      strategy: deep
 profile_base::manage_network: true
 profile_base::static_routes: {}
 profile_base::static_ifaces: {}
@@ -17,6 +21,21 @@ profile_base::ntp_servers:
   - time2.google.com
   - time3.google.com
   - time4.google.com
+profile_base::default_packages:
+  - vim
+  - tree
+  - curl
+  - wget
+  - tcpdump
+  - htop
+  - iftop
+  - iotop
+  - tmux
+  - telnet
+  - unzip
+  - tar
+  - jq
+  - ncdu
 profile_base::manage_firewall_entry: false
 profile_base::mounts: {}
 profile_base::sshd_package_name: 'openssh-server'
