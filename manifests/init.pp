@@ -30,15 +30,15 @@ class profile_base (
   Boolean          $manage_fail2ban,
   String           $timezone,
   Array            $fail2ban_services,
-  Boolean          $manage_sd_service,
   Boolean          $manage_prometheus_node_exporter,
   Boolean          $manage_prometheus_process_exporter,
   Boolean          $manage_prometheus_postfix_exporter,
   Boolean          $manage_choria,
-  Optional[String] $motd_message                = undef,
-  Optional[String] $puppetmaster                = undef,
-  Optional[String] $puppet_srv_domain           = undef,
-  Optional[String] $postfix_relayhost           = undef,
+  Optional[String] $motd_message,
+  Optional[String] $puppetmaster,
+  Optional[String] $puppet_srv_domain,
+  Optional[String] $postfix_relayhost,
+  Boolean          $manage_sd_service                  = lookup('manage_sd_service', Boolean, first, true),
 ) {
   if $manage_network {
     include profile_base::network
@@ -81,7 +81,7 @@ class profile_base (
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
-    content => 'export HISTTIMEFORMAT="%d/%m/%y %t "'
+    content => 'export HISTTIMEFORMAT="%d/%m/%y %T "'
   }
   if $manage_choria {
     include profile_choria
