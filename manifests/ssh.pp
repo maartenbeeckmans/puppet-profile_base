@@ -72,7 +72,7 @@ class profile_base::ssh (
           interval => '10s',
         }
       ],
-      port   => $port,
+      port   => Integer($port),
     }
   }
 }
