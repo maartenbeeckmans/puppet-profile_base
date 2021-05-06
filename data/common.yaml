@@ -46,8 +46,6 @@ profile_base::ssh_password_authentication: 'yes'
 profile_base::ssh_print_motd: 'no'
 profile_base::ssh_x11_forwarding: 'no'
 profile_base::manage_puppet: true
-profile_base::puppet_use_srv_records: true
-profile_base::puppet_runs_per_hour: 2
 profile_base::manage_fail2ban: false
 profile_base::timezone: 'Europe/Brussels'
 profile_base::fail2ban_services:
@@ -58,6 +56,4 @@ profile_base::manage_prometheus_process_exporter: true
 profile_base::manage_prometheus_postfix_exporter: true
 profile_base::manage_choria: true
 profile_base::motd_message: ~
-profile_base::puppetmaster: ~
-profile_base::puppet_srv_domain: ~
 profile_base::postfix_relayhost: ~

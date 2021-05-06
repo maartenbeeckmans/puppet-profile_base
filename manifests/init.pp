@@ -25,8 +25,6 @@ class profile_base (
   String           $ssh_print_motd,
   String           $ssh_x11_forwarding,
   Boolean          $manage_puppet,
-  Boolean          $puppet_use_srv_records,
-  Integer          $puppet_runs_per_hour,
   Boolean          $manage_fail2ban,
   String           $timezone,
   Array            $fail2ban_services,
@@ -35,8 +33,6 @@ class profile_base (
   Boolean          $manage_prometheus_postfix_exporter,
   Boolean          $manage_choria,
   Optional[String] $motd_message,
-  Optional[String] $puppetmaster,
-  Optional[String] $puppet_srv_domain,
   Optional[String] $postfix_relayhost,
   Boolean          $manage_sd_service                  = lookup('manage_sd_service', Boolean, first, true),
 ) {
@@ -63,7 +59,7 @@ class profile_base (
   }
   include profile_base::ssh
   if $manage_puppet {
-    include profile_base::puppet
+    include profile_puppet
   }
   include profile_base::systemd
   include profile_base::puppet
