@@ -62,7 +62,6 @@ class profile_base (
     include profile_puppet
   }
   include profile_base::systemd
-  include profile_base::puppet
   include profile_base::postfix
   class { 'timezone':
     timezone => $timezone,
