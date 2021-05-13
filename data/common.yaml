@@ -36,6 +36,7 @@ profile_base::default_packages:
   - tar
   - jq
   - ncdu
+  - iperf3
 profile_base::manage_firewall_entry: true
 profile_base::mounts: {}
 profile_base::sshd_package_name: 'openssh-server'
