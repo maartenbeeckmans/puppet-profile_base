@@ -2,7 +2,7 @@
 define profile_base::mount (
   Optional[String]     $device     = undef,
   Stdlib::Absolutepath $path       = $name,
-  String               $type       = 'ext4',
+  String               $type       = 'xfs',
   Boolean              $mkdir      = true,
   Boolean              $mkfs       = true,
   String               $owner      = 'root',
@@ -30,7 +30,6 @@ define profile_base::mount (
     filesystem { $device:
       ensure  => present,
       fs_type => $type,
-      options => '-F',
     }
   }
 
