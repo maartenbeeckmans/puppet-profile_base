@@ -2,8 +2,9 @@
 #
 #
 class profile_base::firewall (
-  String  $ensure = $::profile_base::firewall_ensure,
-  Boolean $purge  = $::profile_base::firewall_purge,
+  String  $ensure         = $::profile_base::firewall_ensure,
+  Boolean $purge          = $::profile_base::firewall_purge,
+  Hash    $firewall_rules = $::profile_base::firewall_rules,
 ) {
   class { 'firewall':
     ensure => $ensure,
@@ -12,6 +13,8 @@ class profile_base::firewall (
   resources { 'firewall':
     purge => $purge,
   }
+
+  create_resources(firewall, $firewall_rules)
 
   Firewall {
     before  => Class['profile_base::firewall::post'],

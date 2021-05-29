@@ -13,6 +13,7 @@ class profile_base (
   Hash             $sudo_confs,
   String           $firewall_ensure,
   Boolean          $firewall_purge,
+  Hash             $firewall_rules,
   String           $motd_file,
   Array            $ntp_servers,
   Boolean          $manage_firewall_entry,
