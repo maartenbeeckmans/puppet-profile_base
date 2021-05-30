@@ -1,0 +1,13 @@
+<%- | String $description,
+      String $exec_start,
+| -%>
+# File managed by puppet (profile_base::systemd_timer)
+# Manual changes will be overwritten
+[Unit]
+Description=<%= $description %>
+RefuseManualStart=no
+RefuseManualStop=yes
+ 
+[Service]
+Type=oneshot
+ExecStart=<%= $exec_start %>

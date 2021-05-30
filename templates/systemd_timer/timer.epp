@@ -1,0 +1,18 @@
+<%- | String $description,
+      String $service,
+      String $on_calendar,
+| -%>
+# File managed by puppet (profile_base::systemd_timer)
+# Manual changes will be overwritten
+[Unit]
+Description=<%= $description %>
+RefuseManualStart=no
+RefuseManualStop=no
+ 
+[Timer]
+Persistent=false
+Unit=<%= $service %>
+OnCalendar=<%= $on_calendar %>
+ 
+[Install]
+WantedBy=default.target
