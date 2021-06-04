@@ -8,6 +8,8 @@ define profile_base::systemd_timer (
   Boolean $service_enable = true,
   String  $service_name   = $title,
   String  $description    = $title,
+  String  $user           = 'root',
+  String  $group          = 'root',
 ) {
   # Create timer file
   $_timer_config = {
@@ -23,6 +25,8 @@ define profile_base::systemd_timer (
   $_service_config = {
     'description' => $description,
     'exec_start'  => $command,
+    'user'        => $user,
+    'group'       => $group,
   }
   ::systemd::unit_file{ "${service_name}.service":
     content => epp("${module_name}/systemd_timer/service.epp", $_service_config),
