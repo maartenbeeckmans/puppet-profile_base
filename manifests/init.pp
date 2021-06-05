@@ -58,6 +58,12 @@ class profile_base (
   if $facts['os']['family'] == 'RedHat' {
     include profile_base::selinux
   }
+  if $facts['os']['family'] == 'RedHat' and $facts['is_virtual'] {
+    service { 'lm_sensors.service':
+      ensure => 'stopped',
+      enable => false,
+    }
+  }
   include profile_base::ssh
   if $manage_puppet {
     include profile_puppet
