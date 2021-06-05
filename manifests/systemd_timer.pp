@@ -30,7 +30,6 @@ define profile_base::systemd_timer (
   }
   ::systemd::unit_file{ "${service_name}.service":
     content => epp("${module_name}/systemd_timer/service.epp", $_service_config),
-    require => Service["${service_name}.timer"],
   }
 
   # Making sure timer is enabled
