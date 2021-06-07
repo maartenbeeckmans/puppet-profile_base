@@ -3,6 +3,7 @@
 #
 class profile_base (
   Boolean          $manage_network,
+  Boolean          $disable_ipv6,
   Hash             $static_routes,
   Hash             $static_ifaces,
   String           $domain,

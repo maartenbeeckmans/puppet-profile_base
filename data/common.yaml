@@ -4,6 +4,7 @@ lookup_options:
     merge:
       strategy: deep
 profile_base::manage_network: true
+profile_base::disable_ipv6: true
 profile_base::static_routes: {}
 profile_base::static_ifaces: {}
 profile_base::domain: '~.'

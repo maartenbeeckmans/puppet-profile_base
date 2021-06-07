@@ -2,8 +2,9 @@
 #
 #
 class profile_base::network (
-  Hash             $static_routes = $::profile_base::static_routes,
-  Hash             $static_ifaces = $::profile_base::static_ifaces,
+  Boolean $disable_ipv6  = $::profile_base::disable_ipv6,
+  Hash    $static_routes = $::profile_base::static_routes,
+  Hash    $static_ifaces = $::profile_base::static_ifaces,
 ) {
   # This loop is looking for network configuration, which is defined by custom facts with the following syntax:
   # cat /etc/facter/facts.d/network.yaml
@@ -40,11 +41,18 @@ class profile_base::network (
     ensure => absent,
   }
 
-  # Disable ipv6
-  sysctl { 'net.ipv6.conf.all.disable_ipv6':
-    ensure  => present,
-    value   => '1',
-    comment => 'Disable ipv6',
+  if $disable_ipv6 {
+    sysctl { 'net.ipv6.conf.all.disable_ipv6':
+      ensure  => present,
+      value   => '1',
+      comment => 'Disable ipv6',
+    }
+  } else {
+    sysctl { 'net.ipv6.conf.all.disable_ipv6':
+      ensure  => present,
+      value   => '0',
+      comment => 'Enable ipv6',
+    }
   }
 
   create_resources('::network::route', $static_routes)
