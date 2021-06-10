@@ -29,7 +29,7 @@ class profile_base::ssh (
   }
   sshd_config { 'ChallengeResponseAuthentication':
     ensure => present,
-    value  => 'no',
+    value  => 'yes',
     notify => Service[$sshd_service_name],
   }
   sshd_config { 'UsePAM':
