@@ -6,6 +6,13 @@ class profile_base::firewall (
   Boolean $purge          = $::profile_base::firewall_purge,
   Hash    $firewall_rules = $::profile_base::firewall_rules,
 ) {
+  if $facts['os']['family'] == 'RedHat' {
+    service { 'firewalld':
+      ensure => 'stopped',
+      enable => false,
+    }
+  }
+
   class { 'firewall':
     ensure => $ensure,
   }
