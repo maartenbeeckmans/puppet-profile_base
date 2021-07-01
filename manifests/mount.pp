@@ -49,11 +49,10 @@ define profile_base::mount (
   }
 
   if $type == 'gluster' {
-    profile_gluster::mount { $path,
-      $server      => $gluster_server,
-      $volume_name => $gluster_volume_name,
+    profile_gluster::mount { $path:
+      server      => $gluster_server,
+      volume_name => $gluster_volume_name,
     }
-) {
   }
 
   if $type in ['ext4', 'xfs'] {
