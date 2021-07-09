@@ -72,10 +72,17 @@ class profile_base::ssh (
   }
   if $manage_firewall_entry {
   $listen_addresses.each | Stdlib::IP::Address $listen_address | {
-    firewall { "000${port} allow ssh ${listen_address}":
-      destination => $listen_address,
-      dport       => Integer($port),
-      action      => 'accept',
+    if $listen_address == '0.0.0.0' {
+      firewall { "000${port} allow ssh":
+        dport  => Integer($port),
+        action => 'accept',
+      }
+    } else {
+      firewall { "000${port} allow ssh ${listen_address}":
+        destination => $listen_address,
+        dport       => Integer($port),
+        action      => 'accept',
+      }
     }
   }
   }
