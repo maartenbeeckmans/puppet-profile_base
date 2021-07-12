@@ -4,7 +4,7 @@
 class profile_base::ssh (
   String              $sshd_package_name       = $::profile_base::sshd_package_name,
   String              $sshd_service_name       = $::profile_base::sshd_service_name,
-  Stdlib::Ip::Address $listen_address          = $::profile_base::ssh_listen_addresses,
+  Stdlib::Ip::Address $listen_address          = $::profile_base::ssh_listen_address,
   String              $port                    = $::profile_base::ssh_port,
   String              $permit_root_login       = $::profile_base::ssh_permit_root_login,
   String              $password_authentication = $::profile_base::ssh_password_authentication,
@@ -20,7 +20,7 @@ class profile_base::ssh (
     purge => true,
   }
 
-  sshd_config { 'Listen address':
+  sshd_config { 'ListenAddress':
     ensure => present,
     key    => 'ListenAddress',
     value  => $listen_address,
