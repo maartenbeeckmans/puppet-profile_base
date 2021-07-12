@@ -43,7 +43,7 @@ profile_base::manage_firewall_entry: true
 profile_base::mounts: {}
 profile_base::sshd_package_name: 'openssh-server'
 profile_base::sshd_service_name: 'sshd'
-profile_base::ssh_listen_addresses: ['0.0.0.0']
+profile_base::ssh_listen_address: '0.0.0.0'
 profile_base::ssh_port: '22'
 profile_base::ssh_permit_root_login: 'no'
 profile_base::ssh_password_authentication: 'yes'
