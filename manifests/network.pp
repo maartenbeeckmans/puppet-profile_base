@@ -42,16 +42,18 @@ class profile_base::network (
             ensure => 'stopped',
             enable => false,
           }
+
+          Systemd::Network <| |> -> Service['networking']
         } else {
           fail('Managing network with systemd-networkd is only supported on debian')
         }
         $_network_config = {
           'interface'   => $iface,
           'mac_address' => $_mac_address,
-          'addresses'   => [$_ipaddress],
+          'addresses'   => ["${_ipaddress}/${netmask_to_cidr($_netmask)}"],
           'gateway'     => $_gateway,
         }
-        systemd::unit_file{"${iface}.network":
+        systemd::network{"${iface}.network":
           content => epp("${module_name}/systemd_network.epp", $_network_config),
         }
       }
