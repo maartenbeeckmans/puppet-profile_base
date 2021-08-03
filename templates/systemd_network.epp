@@ -1,0 +1,23 @@
+<%- | String           $interface,
+      String           $mac_address,
+      Array[String]    $addresses,
+      Optional[String] $gateway,
+| -%>
+# File managed by puppet (profile_base::network)
+# Manual changes will be overwritten
+[Match]
+Name=<%= $interface %>
+MACAddress=<%= $mac_address %>
+
+[Network]
+Description=<%= $interface %>
+
+[Address]
+<% $addresses.each |$address| { -%>
+Address=<%= $address %>
+<% } -%>
+
+[Route]
+<% if $gateway { -%>
+Gateway=<%= $gateway %>
+<% } -%>

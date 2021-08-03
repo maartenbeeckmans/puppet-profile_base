@@ -2,9 +2,10 @@
 #
 #
 class profile_base::network (
-  Boolean $disable_ipv6  = $::profile_base::disable_ipv6,
-  Hash    $static_routes = $::profile_base::static_routes,
-  Hash    $static_ifaces = $::profile_base::static_ifaces,
+  Enum['native', 'systemd'] $network_config = $::profile_base::network_config,
+  Boolean                   $disable_ipv6   = $::profile_base::disable_ipv6,
+  Hash                      $static_routes  = $::profile_base::static_routes,
+  Hash                      $static_ifaces  = $::profile_base::static_ifaces,
 ) {
   # This loop is looking for network configuration, which is defined by custom facts with the following syntax:
   # cat /etc/facter/facts.d/network.yaml
@@ -27,12 +28,32 @@ class profile_base::network (
     $_mac_address = $facts["macaddress_${_primary_iface}"]
 
     if $_ipaddress and $_netmask {
-      network::interface { $iface:
-        enable    => true,
-        ipaddress => $_ipaddress,
-        netmask   => $_netmask,
-        hwaddr    => $_mac_address,
-        gateway   => $_gateway,
+      if $network_config == 'native' {
+        network::interface { $iface:
+          enable    => true,
+          ipaddress => $_ipaddress,
+          netmask   => $_netmask,
+          hwaddr    => $_mac_address,
+          gateway   => $_gateway,
+        }
+      } else {
+        if $facts['os']['family'] == 'Debian' {
+          service { 'networking':
+            ensure => 'stopped',
+            enable => false,
+          }
+        } else {
+          fail('Managing network with systemd-networkd is only supported on debian')
+        }
+        $_network_config = {
+          'interface'   => $iface,
+          'mac_address' => $_mac_address,
+          'addresses'   => [$_ipaddress],
+          'gateway'     => $_gateway,
+        }
+        systemd::unit_file{"${iface}.network":
+          content => epp("${module_name}/systemd_network.epp", $_network_config),
+        }
       }
     }
   }
@@ -55,6 +76,8 @@ class profile_base::network (
     }
   }
 
-  create_resources('::network::route', $static_routes)
-  create_resources('::network::if::static', $static_ifaces)
+  if $network_config == 'native' {
+    create_resources('::network::route', $static_routes)
+    create_resources('::network::if::static', $static_ifaces)
+  }
 }
