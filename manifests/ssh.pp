@@ -84,14 +84,26 @@ class profile_base::ssh (
     }
   }
   if $manage_sd_service {
-    consul::service { 'ssh':
-      checks => [
-        {
-          tcp      => "${facts[networking][ip]}:${port}",
-          interval => '10s',
-        }
-      ],
-      port   => Integer($port),
+    if $listen_address == '0.0.0.0' {
+      consul::service { 'ssh':
+        checks => [
+          {
+            tcp      => "${facts[networking][ip]}:${port}",
+            interval => '10s',
+          }
+        ],
+        port   => Integer($port),
+      }
+    } else {
+      consul::service { 'ssh':
+        checks => [
+          {
+            tcp      => "${listen_address}:${port}",
+            interval => '10s',
+          }
+        ],
+        port   => Integer($port),
+      }
     }
   }
 }
