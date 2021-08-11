@@ -94,6 +94,6 @@ class profile_base::network (
 
   if $network_config == 'native' {
     create_resources('::network::route', $static_routes)
-    create_resources('::network::if::static', $static_ifaces)
+    create_resources('::network::interface', $static_ifaces)
   }
 }
