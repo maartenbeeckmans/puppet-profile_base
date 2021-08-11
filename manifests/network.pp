@@ -23,6 +23,18 @@ class profile_base::network (
     } else {
       $_gateway = $facts["init_gateway_${iface}"]
     }
+    # mtu
+    if $facts["init_mtu_${iface}"] == '' {
+      $_mtu = undef
+    } else {
+      $_mtu = $facts["init_mtu_${iface}"]
+    }
+    # pointopoint
+    if $facts["init_pointopoint_${iface}"] == '' {
+      $_pointopoint = undef
+    } else {
+      $_pointopoint = $facts["init_pointopoint_${iface}"]
+    }
     # macaddress
     $_primary_iface = regsubst($iface, ':[0-9]*$', '') # eth0.0 > 0
     $_mac_address = $facts["macaddress_${_primary_iface}"]
@@ -30,11 +42,13 @@ class profile_base::network (
     if $_ipaddress and $_netmask {
       if $network_config == 'native' {
         network::interface { $iface:
-          enable    => true,
-          ipaddress => $_ipaddress,
-          netmask   => $_netmask,
-          hwaddr    => $_mac_address,
-          gateway   => $_gateway,
+          enable      => true,
+          ipaddress   => $_ipaddress,
+          netmask     => $_netmask,
+          hwaddr      => $_mac_address,
+          gateway     => $_gateway,
+          mtu         => $_mtu,
+          pointopoint => $_pointopoint,
         }
       } else {
         if $facts['os']['family'] == 'Debian' {
@@ -60,7 +74,7 @@ class profile_base::network (
     }
   }
 
-  package { ['isc-dhcp-client', 'isc-dhcp-common']:
+  package { ['isc-dhcp-client', 'isc-dhcp-common', 'hc-utils']:
     ensure => absent,
   }
 
