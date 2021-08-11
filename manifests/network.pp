@@ -7,6 +7,11 @@ class profile_base::network (
   Hash                      $static_routes  = $::profile_base::static_routes,
   Hash                      $static_ifaces  = $::profile_base::static_ifaces,
 ) {
+  file { '/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg':
+    ensure  => file,
+    content => 'network: {config: disabled}',
+  }
+
   # This loop is looking for network configuration, which is defined by custom facts with the following syntax:
   # cat /etc/facter/facts.d/network.yaml
   # ipaddress_<interface_name>: x.x.x.x
