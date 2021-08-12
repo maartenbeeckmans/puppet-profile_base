@@ -3,4 +3,5 @@ profile_base::default_packages:
   - httpie
   - silversearcher-ag
   - dnsutils
+  - ripgrep
 ...
