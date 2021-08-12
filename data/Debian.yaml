@@ -4,4 +4,5 @@ profile_base::default_packages:
   - silversearcher-ag
   - dnsutils
   - ripgrep
+  - apt-file
 ...
