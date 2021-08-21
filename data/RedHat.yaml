@@ -3,4 +3,5 @@ profile_base::default_packages:
   - tcpdump
   - the_silver_searcher
   - bind-utils
+  - xz
 ...

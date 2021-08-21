@@ -6,4 +6,5 @@ profile_base::default_packages:
   - ripgrep
   - apt-file
   - sysstat
+  - xz-utils
 ...
