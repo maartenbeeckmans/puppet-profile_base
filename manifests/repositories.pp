@@ -7,11 +7,7 @@ class profile_base::repositories {
   }
 
   if $facts['os']['family'] == 'Debian' {
-    class { 'apt':
-      update      => {
-        frequency => 'daily',
-      }
-    }
+    include apt
     class { 'apt::backports':
       pin => 100,
     }
