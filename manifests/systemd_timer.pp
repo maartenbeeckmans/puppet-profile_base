@@ -17,9 +17,6 @@ define profile_base::systemd_timer (
     'service'     => "${service_name}.service",
     'on_calendar' => $on_calendar,
   }
-  systemd::unit_file{"${service_name}.timer":
-    content => epp("${module_name}/systemd_timer/timer.epp", $_timer_config),
-  }
 
   # Create service file
   $_service_config = {
@@ -28,13 +25,16 @@ define profile_base::systemd_timer (
     'user'        => $user,
     'group'       => $group,
   }
-  ::systemd::unit_file{ "${service_name}.service":
-    content => epp("${module_name}/systemd_timer/service.epp", $_service_config),
+
+  ::systemd::timer{ "${service_name}.timer":
+    timer_content  => epp("${module_name}/systemd_timer/timer.epp", $_timer_config),
+    service_content => epp("${module_name}/systemd_timer/service.epp", $_service_config),
   }
 
   # Making sure timer is enabled
   service { "${service_name}.timer":
-    ensure => $service_ensure,
-    enable => $service_enable,
+    ensure    => $service_ensure,
+    enable    => $service_enable,
+    subscribe => Systemd::Timer["${service_name}.timer"],
   }
 }
