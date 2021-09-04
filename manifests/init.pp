@@ -91,5 +91,10 @@ class profile_base (
   if $manage_choria {
     include profile_choria
   }
+  if $facts['is_virtual'] {
+    package { 'cloud-init':
+      ensure => absent,
+    }
+  }
   create_resources(profile_base::mount, $mounts)
 }
