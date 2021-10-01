@@ -38,6 +38,7 @@ class profile_base (
   Boolean                   $manage_choria,
   Optional[String]          $motd_message,
   Optional[String]          $postfix_relayhost,
+  Hash                      $additional_host_entries,
   Boolean                   $manage_sd_service                  = lookup('manage_sd_service', Boolean, first, true),
 ) {
   if $manage_network {
@@ -97,4 +98,5 @@ class profile_base (
     }
   }
   create_resources(profile_base::mount, $mounts)
+  include profile_base::hosts
 }
