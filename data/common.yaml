@@ -41,6 +41,8 @@ profile_base::default_packages:
   - ncdu
   - iperf3
   - psmisc
+  - ethtool
+  - net-tools
 profile_base::manage_firewall_entry: true
 profile_base::mounts: {}
 profile_base::sshd_package_name: 'openssh-server'
