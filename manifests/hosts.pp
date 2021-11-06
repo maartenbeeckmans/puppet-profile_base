@@ -2,7 +2,8 @@
 #
 #
 class profile_base::hosts (
-  Hash $additional_host_entries = $::profile_base::additional_host_entries,
+  Stdlib::IP::Address $ip_address              = $facts['networking']['ip'],
+  Hash                $additional_host_entries = $::profile_base::additional_host_entries,
 ) {
   resources { 'host':
     purge => true,
@@ -21,7 +22,7 @@ class profile_base::hosts (
 
   host { $facts['networking']['fqdn']:
     ensure       => 'present',
-    ip           => '127.0.1.1',
+    ip           => $ip_address,
     host_aliases => [ $facts['networking']['hostname'], "${facts['networking']['hostname']}.${::environment}" ],
   }
 
