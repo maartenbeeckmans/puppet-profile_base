@@ -43,6 +43,8 @@ profile_base::default_packages:
   - psmisc
   - ethtool
   - net-tools
+  - bc
+  - nmap
 profile_base::manage_firewall_entry: true
 profile_base::mounts: {}
 profile_base::sshd_package_name: 'openssh-server'
