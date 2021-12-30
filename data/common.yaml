@@ -15,6 +15,8 @@ profile_base::name_servers:
 profile_base::users: {}
 profile_base::groups: {}
 profile_base::sudo_confs: {}
+profile_base::firewall_type: 'iptables'
+profile_base::trusted_subnets: []
 profile_base::firewall_ensure: 'running'
 profile_base::firewall_purge: true
 profile_base::firewall_rules: {}

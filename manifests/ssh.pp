@@ -11,6 +11,7 @@ class profile_base::ssh (
   String              $print_motd              = $::profile_base::ssh_print_motd,
   String              $x11_forwarding          = $::profile_base::ssh_x11_forwarding,
   Boolean             $manage_firewall_entry   = $::profile_base::manage_firewall_entry,
+  Enum['iptables','nftables'] $firewall_type   = $::profile_base::firewall_type,
   Boolean             $manage_sd_service       = $::profile_base::manage_sd_service,
 ) {
   package { $sshd_package_name:
@@ -71,15 +72,13 @@ class profile_base::ssh (
   }
   if $manage_firewall_entry {
     if $listen_address == '0.0.0.0' {
-      firewall { "000${port} allow ssh":
+      profile_base::firewall::rule { 'allow_ssh':
         dport  => Integer($port),
-        action => 'accept',
       }
     } else {
-      firewall { "000${port} allow ssh ${listen_address}":
-        destination => $listen_address,
-        dport       => Integer($port),
-        action      => 'accept',
+      profile_base::firewall::rule { 'allow_ssh':
+        dport => Integer($port),
+        daddr => $listen_address,
       }
     }
   }
